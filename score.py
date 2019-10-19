@@ -67,13 +67,14 @@ def register():
     user = User(request.form['username'] , request.form['password'],request.form['email'])
     db.session.add(user)
     db.session.commit()
-    flash('User successfully registered')
+    flash('User is successfully registered')
+  
     return redirect(url_for('login'))
  
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('log.html')
     return redirect(url_for('index'))
 
 
