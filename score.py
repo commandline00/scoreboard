@@ -1,3 +1,4 @@
+###header start###
 from flask import Flask,render_template,redirect,url_for,request,flash
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
@@ -9,12 +10,16 @@ from flask_login import LoginManager , login_required , UserMixin , login_user
 from datetime import datetime
 import time
 import socket
+###header end###
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/sherlock/Desktop/CENG/scoreboard/score.db'
+
+#db initalization
 db = SQLAlchemy(app)
 
-
+#secret key is temporary for now
 app.config['SECRET_KEY'] = 'b\xc1<\x9f]H\xfar\t[\x96\x07YG\xc8\xe4Q\xc43#\xdc\xe5E\xf5\xd9'
 login_manager = LoginManager()
 login_manager.login_view = "login"
@@ -33,6 +38,7 @@ class User(db.Model):
     registered_on = db.Column('registered_on' , db.DateTime)
  
     def __init__(self , username ,password , email):
+        #initialize the vars
         self.username = username
         self.password = password
         self.email = email
@@ -55,6 +61,7 @@ class User(db.Model):
 
 @app.route('/register' , methods=['GET','POST'])
 def register():
+    #register a new record
     if request.method == 'GET':
         return render_template('register.html')
     user = User(request.form['username'] , request.form['password'],request.form['email'])
@@ -112,6 +119,7 @@ class score(db.Model):
     complete=db.Column(db.Boolean)
 
 class LoginForm(Form):
+    #username and password part
     username=StringField("Kullanici Adi")
     password=PasswordField("Parola")
 
