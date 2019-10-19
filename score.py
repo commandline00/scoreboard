@@ -7,7 +7,8 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager , login_required , UserMixin , login_user
 from datetime import datetime
-
+import time
+import socket
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/sherlock/Desktop/CENG/scoreboard/score.db'
